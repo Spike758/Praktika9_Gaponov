@@ -1,0 +1,27 @@
+CREATE TABLE genres (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE,
+  description TEXT
+);
+
+CREATE TABLE games (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  description TEXT,
+  release_date TEXT,
+  price REAL,
+  developer TEXT,
+  rating INTEGER,
+  genre_id INTEGER,
+  created_at TEXT DEFAULT (datetime('now','localtime')),
+  FOREIGN KEY (genre_id) REFERENCES genres(id)
+);
+INSERT INTO genres (name, description) VALUES 
+  ('RPG', 'Ролевые игры'),
+  ('Шутер', 'Экшен-игры с стрельбой'),
+  ('Стратегия', 'Стратегические игры');
+
+INSERT INTO games (title, description, release_date, price, developer, rating, genre_id) VALUES
+  ('The Witcher 3', 'Фэнтези РПГ', '2015-05-19', 29.99, 'CD Projekt Red', 5, 1),
+  ('Cyberpunk 2077', 'Киберпанк РПГ', '2020-12-10', 49.99, 'CD Projekt Red', 4, 1),
+  ('Call of Duty', 'Военный шутер', '2019-10-25', 59.99, 'Infinity Ward', 4, 2);
